@@ -2503,12 +2503,12 @@ PrefabInstance:
     - target: {fileID: 288519841028870808, guid: e21c4a372e094de4390f32e282895a47,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -332.1
+      value: -328.7
       objectReference: {fileID: 0}
     - target: {fileID: 288519841028870808, guid: e21c4a372e094de4390f32e282895a47,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.5000038
+      value: 121
       objectReference: {fileID: 0}
     - target: {fileID: 288519841028870808, guid: e21c4a372e094de4390f32e282895a47,
         type: 3}
@@ -2920,6 +2920,11 @@ MonoBehaviour:
   - {fileID: 1599621417}
   - {fileID: 1561819501}
   - {fileID: 1179342768}
+  wavs:
+  - {fileID: 8300000, guid: 9cea592e5df5cdd4b95fc57004b6942c, type: 3}
+  - {fileID: 8300000, guid: c8080ef1cf4e2fd46a1af1ee36af74e1, type: 3}
+  - {fileID: 8300000, guid: a6f8d9ebc14e544448eec8afc84c5e42, type: 3}
+  shhwhh: {fileID: 8300000, guid: ac6c55130af008d4c9af12274b601b83, type: 3}
 --- !u!114 &1486051920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2935,6 +2940,10 @@ MonoBehaviour:
   pool:
   - {fileID: 5471154262514193682}
   - {fileID: 2564561}
+  wavs:
+  - {fileID: 8300000, guid: c8080ef1cf4e2fd46a1af1ee36af74e1, type: 3}
+  - {fileID: 8300000, guid: 9cea592e5df5cdd4b95fc57004b6942c, type: 3}
+  shhwhh: {fileID: 8300000, guid: ac6c55130af008d4c9af12274b601b83, type: 3}
 --- !u!4 &1486051921
 Transform:
   m_ObjectHideFlags: 0

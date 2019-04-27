@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -27,13 +28,14 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI furthestGeneration;
     public CanvasGroup gameOverPanel;
 
-    private int highestWorship = 0;
-
+    private int highestWorship = 5;
+    
     void Awake()
     {
         _resources = new IslandResources();
         _lifeformDeck = GetComponent<LifeformDeck>();
         _planetDeck = GetComponent<PlanetDeck>();
+        highestWorship = _resources.Worship;
 
         _lifeformDeck.CardClicked += LifeformDeck_CardClicked;
         _planetDeck.CardClicked += PlanetDeck_CardClicked;
@@ -76,12 +78,12 @@ public class GameController : MonoBehaviour
         {
             case GameState.Initial:
                 _state = GameState.DealCards;
+                endTurn.interactable = false;
                 UpdateGauges();
                 break;
             case GameState.DealCards:
-                _lifeformDeck.Deal();
-                _planetDeck.Deal();
-                _state = GameState.PlayerAction;
+                StartCoroutine(DealCards());
+                _state = GameState.WaitingOnCoroutine;
                 break;
             case GameState.PlayerAction:
                 _planetDeck.EnableCards();
@@ -93,7 +95,7 @@ public class GameController : MonoBehaviour
                 _state = GameState.ChooseLifeformCard;
                 break;
             case GameState.RoundOver:
-                EndTurn();
+                StartCoroutine(EndTheRound());
                 break;
             case GameState.YouAreDead:
                 _planetDeck.EnableCards(false);
@@ -106,6 +108,23 @@ public class GameController : MonoBehaviour
                 furthestGeneration.text = _resources.Generation.ToString();
                 _state = GameState.GameOver;
                 break;
+        }
+    }
+
+    private IEnumerator EndTheRound()
+    {
+        endTurn.interactable = false;
+        EndTurn();
+        if (_state == GameState.YouAreDead)
+        {
+            yield break;
+        }
+        else
+        {
+            yield return _planetDeck.UnDeal();
+            yield return _lifeformDeck.UnDeal();
+            yield return new WaitForSeconds(2);
+            _state = GameState.DealCards;
         }
     }
 
@@ -123,7 +142,7 @@ public class GameController : MonoBehaviour
         if (_resources.IsDead)
             _state = GameState.YouAreDead;
         else
-            _state = GameState.DealCards;
+            _state = GameState.WaitingOnCoroutine;
     }
 
     private void UpdateGauges()
@@ -133,5 +152,15 @@ public class GameController : MonoBehaviour
         mineral.Set(_resources.Minerals);
         worship.Set(_resources.Worship);
         generation.text = string.Format("{0:000}", _resources.Generation);
+    }
+
+    private IEnumerator DealCards()
+    {
+        endTurn.interactable = false;
+        yield return _lifeformDeck.Deal();
+        yield return new WaitForSeconds(1f);
+        yield return _planetDeck.Deal();
+        _state = GameState.PlayerAction;
+        endTurn.interactable = true;
     }
 }

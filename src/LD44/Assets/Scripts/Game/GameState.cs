@@ -7,5 +7,7 @@
     ChooseLifeformCard,
     RoundOver,
     YouAreDead,
-    GameOver
+    GameOver,
+    // WaitingOnCoroutine - Special case -- no handler, up to transition to move to next state
+    WaitingOnCoroutine
 }
