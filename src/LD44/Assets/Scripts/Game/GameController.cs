@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PlanetDeck))]
@@ -15,10 +17,16 @@ public class GameController : MonoBehaviour
     private GameState _state = GameState.Initial;
 
     public Button endTurn;
+    public Button gameOver;
     public GaugeBehaviour water;
     public GaugeBehaviour mineral;
     public GaugeBehaviour wood;
     public GaugeBehaviour worship;
+    public TextMeshProUGUI generation;
+    public TextMeshProUGUI highestWorshipLevel;
+    public CanvasGroup gameOverPanel;
+
+    private int highestWorship = 0;
 
     void Awake()
     {
@@ -31,6 +39,10 @@ public class GameController : MonoBehaviour
 
         endTurn.onClick.AddListener(new UnityAction(() => {
             _state = GameState.RoundOver;
+        }));
+
+        gameOver.onClick.AddListener(new UnityAction(()=> {
+            SceneManager.LoadScene("main");
         }));
     }
 
@@ -86,6 +98,11 @@ public class GameController : MonoBehaviour
                 _planetDeck.EnableCards(false);
                 _lifeformDeck.EnableCards(false);
                 endTurn.interactable = false;
+                gameOverPanel.interactable = true;
+                gameOverPanel.blocksRaycasts = true;
+                gameOverPanel.alpha = 1f;
+                highestWorshipLevel.text = highestWorship.ToString();
+                _state = GameState.GameOver;
                 break;
         }
     }
@@ -93,6 +110,13 @@ public class GameController : MonoBehaviour
     private void EndTurn()
     {
         _lifeformDeck.ApplyDeltas(_resources);
+
+        // Store the player's highest worship
+        if (_resources.Worship > highestWorship)
+        {
+            highestWorship = _resources.Worship;
+        }
+
         UpdateGauges();
         if (_resources.IsDead)
             _state = GameState.YouAreDead;
@@ -106,5 +130,6 @@ public class GameController : MonoBehaviour
         wood.Set(_resources.Wood);
         mineral.Set(_resources.Minerals);
         worship.Set(_resources.Worship);
+        generation.text = string.Format("{0:000}", _resources.Generation);
     }
 }

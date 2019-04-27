@@ -4,7 +4,7 @@
     public int Minerals { get; set; } = 10;
     public int Wood { get; set; } = 10;
     public int Worship { get; set; } = 5;
-    public int Generation { get; set; } = 0;    
+    public int Generation { get; set; } = 1;    
 
     public bool IsDead
     {

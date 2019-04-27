@@ -62,5 +62,7 @@ public class LifeformDeck : MonoBehaviour
 
             card.Details.Apply(resources);
         }
+
+        resources.Generation++;
     }
 }

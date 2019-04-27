@@ -6,5 +6,6 @@
     SetupChooseLifeformCard,
     ChooseLifeformCard,
     RoundOver,
-    YouAreDead
+    YouAreDead,
+    GameOver
 }
