@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     public GaugeBehaviour worship;
     public TextMeshProUGUI generation;
     public TextMeshProUGUI highestWorshipLevel;
+    public TextMeshProUGUI furthestGeneration;
     public CanvasGroup gameOverPanel;
 
     private int highestWorship = 0;
@@ -102,6 +103,7 @@ public class GameController : MonoBehaviour
                 gameOverPanel.blocksRaycasts = true;
                 gameOverPanel.alpha = 1f;
                 highestWorshipLevel.text = highestWorship.ToString();
+                furthestGeneration.text = _resources.Generation.ToString();
                 _state = GameState.GameOver;
                 break;
         }

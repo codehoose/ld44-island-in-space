@@ -51,10 +51,25 @@ Player decides how to action the cards. They can only choose two cards to play a
 
 # TODO
 
-	- -- Game over case
 	- Splash / start screen
-	- Instructions
 	- Music
 	- Sound effects
-	- Options???
 	- That do-over mechanic
+
+# Instructions
+The objective of the game is to acquire as many worshipers as possible in as short a number of generations as possible.
+
+You are a lonely island floating in space. On your surface are worshipers who need to use your resources - your life force - to live their lives. You have the opportunity to grant their wishes, or toss their needs aside as you see fit. 
+
+You have four key aspects; water, minerals, forest and worship. If any two of those resources reach zero then you cannot survive and you will die. Prevent yourself from dying by granting only the wishes that will profit you and your worshipers.
+
+Good luck!
+
+# How to Play
+The lifeforces on the space island require things. These are presented as three cards on top of the screen. You are given two choices, also presented as cards on the bottom of the screen. 
+
+You need to minimize the impact to your resources while maintaining or growing your worshipers. On the left hand side is a series of gauges for each of your resources. Keep an eye on the gauges! If two or more dip to zero it's game over for you and your worshipers.
+
+When the cards have been dealt, click one of your cards to select it. Then click a worshipers card to alter it. For example a discard action will remove a card from a worshiper request. When complete, click the "End Turn" button.
+
+The game ends when two or more of your resources reach zero.

@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Game\GameState.cs" />
     <Compile Include="Assets\Scripts\Game\IslandResources.cs" />
     <Compile Include="Assets\Scripts\Game\LifeformDeck.cs" />
+    <Compile Include="Assets\Scripts\Game\MusicBehaviour.cs" />
     <Compile Include="Assets\Scripts\Game\PlanetCard.cs" />
     <Compile Include="Assets\Scripts\Game\PlanetCardBehaviour.cs" />
     <Compile Include="Assets\Scripts\Game\PlanetDeck.cs" />
@@ -77,6 +78,8 @@
     <Compile Include="Assets\Scripts\Game\PlayerCard.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerDeckFactory.cs" />
     <Compile Include="Assets\Scripts\UI\GaugeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\InstructionsBehaviour.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuBehaviour.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Art\font\readme.txt" />
