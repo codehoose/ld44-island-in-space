@@ -9,6 +9,11 @@ public class MusicBehaviour : MonoBehaviour
     void Awake()
     {
         var musicOn = PlayerPrefs.GetInt("music", 1) == 1;
+        ToggleMusic(musicOn);
+    }
+
+    public void ToggleMusic(bool musicOn)
+    {
         if (!musicOn)
         {
             var silence = audioMixer.FindSnapshot("Silence");
@@ -16,9 +21,12 @@ public class MusicBehaviour : MonoBehaviour
         }
         else
         {
+            var silence = audioMixer.FindSnapshot("FullVolume");
+            audioMixer.TransitionToSnapshots(new AudioMixerSnapshot[] { silence }, new float[] { 1 }, 0);
             var audioSource = GetComponent<AudioSource>();
             audioSource.Play();
         }
 
+        PlayerPrefs.SetInt("music", musicOn ? 1 : 0);
     }
 }

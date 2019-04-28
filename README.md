@@ -68,10 +68,3 @@ For example:
 * Planet is dealt their three/ two? cards
 
 Player decides how to action the cards. They can only choose two cards to play at a time. After each round, the remaining card is disposed of.
-
-# TODO
-
-	- Music
-	- Sound effects
-	- That do-over mechanic -- Meh.. Maybe this is enough???
-

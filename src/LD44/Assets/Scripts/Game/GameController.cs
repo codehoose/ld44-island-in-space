@@ -16,9 +16,11 @@ public class GameController : MonoBehaviour
     private IslandResources _resources;
 
     private GameState _state = GameState.Initial;
+    bool musicPlaying;
 
     public Button endTurn;
     public Button gameOver;
+    public Button musicButton;
     public GaugeBehaviour water;
     public GaugeBehaviour mineral;
     public GaugeBehaviour wood;
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI generation;
     public TextMeshProUGUI highestWorshipLevel;
     public TextMeshProUGUI furthestGeneration;
+    public TextMeshProUGUI musicLabel;
+
     public CanvasGroup gameOverPanel;
 
     private int highestWorship = 5;
@@ -46,6 +50,22 @@ public class GameController : MonoBehaviour
 
         gameOver.onClick.AddListener(new UnityAction(()=> {
             SceneManager.LoadScene("main");
+        }));
+
+        musicPlaying = PlayerPrefs.GetInt("music", 1) == 1;
+        if (musicPlaying)
+            musicLabel.text = "Music On";
+        else
+            musicLabel.text = "Music Off";
+
+        var musicController = GetComponent<MusicBehaviour>();
+        musicButton.onClick.AddListener(new UnityAction(()=> {
+            musicPlaying = !musicPlaying;
+            if (musicPlaying)
+                musicLabel.text = "Music On";
+            else
+                musicLabel.text = "Music Off";
+            musicController.ToggleMusic(musicPlaying);
         }));
     }
 
