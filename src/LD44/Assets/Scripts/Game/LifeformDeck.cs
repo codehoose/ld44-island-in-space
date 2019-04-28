@@ -7,7 +7,7 @@ public class LifeformDeck : MonoBehaviour
 {
     private readonly float[] xpos = new float[] { -120, -40, 40 };
     private PlayerDeckFactory factory = new PlayerDeckFactory();
-    private AudioSource audioSource;
+    private MusicBehaviour audioSource;
 
     public CardBehaviour[] pool;
     public AudioClip[] wavs;
@@ -17,7 +17,7 @@ public class LifeformDeck : MonoBehaviour
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<MusicBehaviour>();
 
         foreach (var card in pool)
         {
@@ -32,7 +32,14 @@ public class LifeformDeck : MonoBehaviour
     {
         foreach (var card in pool)
         {
-            card.EnableClick(interactable);
+            if (card.IsFaceUp)
+            {
+                card.EnableClick(interactable);
+            }
+            else
+            {
+                card.EnableClick(false);
+            }
         }
     }
 
@@ -105,6 +112,14 @@ public class LifeformDeck : MonoBehaviour
         {
             card.gameObject.transform.localPosition = new Vector3(-360, 0);
             card.ShowFront(false);
+        }
+    }
+
+    internal void ShowSelectionArrow(bool show)
+    {
+        foreach (var card in pool)
+        {
+            card.ShowSelectionArrow(show);
         }
     }
 

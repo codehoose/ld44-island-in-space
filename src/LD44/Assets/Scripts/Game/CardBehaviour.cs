@@ -10,6 +10,7 @@ public class CardBehaviour : MonoBehaviour
     public Sprite front;
     public CanvasGroup uiElements;
     public Image background;
+    public Image selectionArrow;
 
     public TextMeshProUGUI header;
     public TextMeshProUGUI body;
@@ -51,6 +52,7 @@ public class CardBehaviour : MonoBehaviour
         get;
         private set;
     }
+
     public bool IsFaceUp
     {   
         get
@@ -79,6 +81,17 @@ public class CardBehaviour : MonoBehaviour
         ApplyValue(card.MineralsDelta, s => Mineral = s);
         ApplyValue(card.WorshipDelta, s => Worship = s);
     }
+    public void ShowSelectionArrow(bool show)
+    {
+        if (IsFaceUp)
+        {
+            selectionArrow.gameObject.SetActive(show);
+        }
+        else
+        {
+            selectionArrow.gameObject.SetActive(false);
+        }
+    }
 
     public void ShowFront(bool showFront)
     {
@@ -91,6 +104,7 @@ public class CardBehaviour : MonoBehaviour
         {
             background.sprite = back;
             uiElements.alpha = 0;
+            ShowSelectionArrow(false);
         }
     }
 

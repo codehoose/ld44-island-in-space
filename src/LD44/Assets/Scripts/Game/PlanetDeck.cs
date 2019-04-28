@@ -5,7 +5,7 @@ public class PlanetDeck : MonoBehaviour
 {
     private readonly float[] xpos = new float[] { -80, 0 }; //{ -120, -40, 40 };
     private PlanetDeckFactory factory = new PlanetDeckFactory();
-    private AudioSource audioSource;
+    private MusicBehaviour audioSource;
 
     public PlanetCardBehaviour[] pool;
     public AudioClip[] wavs;
@@ -15,7 +15,7 @@ public class PlanetDeck : MonoBehaviour
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<MusicBehaviour>();
 
         foreach (var card in pool)
         {

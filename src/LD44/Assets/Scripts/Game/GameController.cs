@@ -32,6 +32,12 @@ public class GameController : MonoBehaviour
 
     public CanvasGroup gameOverPanel;
 
+    public AudioClip selectCard;
+    public AudioClip attackCard;
+    public AudioClip endTurnAudio;
+
+    private MusicBehaviour audioSource;
+
     private int highestWorship = 5;
     
     void Awake()
@@ -39,6 +45,7 @@ public class GameController : MonoBehaviour
         _resources = new IslandResources();
         _lifeformDeck = GetComponent<LifeformDeck>();
         _planetDeck = GetComponent<PlanetDeck>();
+        audioSource = GetComponent<MusicBehaviour>();
         highestWorship = _resources.Worship;
 
         _lifeformDeck.CardClicked += LifeformDeck_CardClicked;
@@ -76,6 +83,7 @@ public class GameController : MonoBehaviour
             _state = GameState.SetupChooseLifeformCard;
             _planetCard = e.Details;
             _planetCardBehaviour = e.Card;
+            audioSource.PlayOneShot(selectCard);
         }
     }
 
@@ -86,8 +94,10 @@ public class GameController : MonoBehaviour
             _state = GameState.PlayerAction;
             _planetCard.ApplyAction(e.Details, e.Card);
             _planetCardBehaviour.ShowFront(false);
+            _lifeformDeck.ShowSelectionArrow(false);
             _planetCard = null;
             _planetCardBehaviour = null;
+            audioSource.PlayOneShot(attackCard);
         }
     }
 
@@ -112,6 +122,7 @@ public class GameController : MonoBehaviour
             case GameState.SetupChooseLifeformCard:
                 _planetDeck.EnableCards(false);
                 _lifeformDeck.EnableCards();
+                _lifeformDeck.ShowSelectionArrow(true);
                 _state = GameState.ChooseLifeformCard;
                 break;
             case GameState.RoundOver:
@@ -133,6 +144,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator EndTheRound()
     {
+        audioSource.PlayOneShot(endTurnAudio);
         endTurn.interactable = false;
         EndTurn();
         if (_state == GameState.YouAreDead)

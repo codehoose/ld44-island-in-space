@@ -5,11 +5,22 @@ using UnityEngine.Audio;
 public class MusicBehaviour : MonoBehaviour
 {
     public AudioMixer audioMixer;
+    private bool musicOn;
+    private AudioSource audioSource;
 
     void Awake()
     {
-        var musicOn = PlayerPrefs.GetInt("music", 1) == 1;
+        audioSource = GetComponent<AudioSource>();
+        musicOn = PlayerPrefs.GetInt("music", 1) == 1;
         ToggleMusic(musicOn);
+    }
+
+    public void PlayOneShot(AudioClip clip)
+    {
+        if (!musicOn)
+            return;
+
+        audioSource.PlayOneShot(clip);
     }
 
     public void ToggleMusic(bool musicOn)
@@ -28,5 +39,6 @@ public class MusicBehaviour : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("music", musicOn ? 1 : 0);
+        this.musicOn = musicOn;
     }
 }
